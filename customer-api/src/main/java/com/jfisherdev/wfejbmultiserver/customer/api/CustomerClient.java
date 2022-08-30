@@ -23,6 +23,18 @@ public class CustomerClient {
         return getService().addNewCustomer(name);
     }
 
+    public String getCustomerSatisfactionRating(long id, boolean assess, boolean verbose) {
+        return getService().getCustomerSatisfactionRating(id, assess, verbose);
+    }
+
+    public String getCustomerSatisfactionRatingV1(long id) {
+        return getService().getCustomerSatisfactionRatingV1(id);
+    }
+
+    public String getCustomerSatisfactionRatingV2(long id) {
+        return getService().getCustomerSatisfactionRatingV2(id);
+    }
+
     private CustomerServiceRemote getService() {
         try {
             return ejbClient.lookup(CustomerAppConstants.EJB_APP_NAME, CustomerAppConstants.EJB_MODULE_NAME, CustomerServiceRemote.BEAN_NAME, CustomerServiceRemote.class);

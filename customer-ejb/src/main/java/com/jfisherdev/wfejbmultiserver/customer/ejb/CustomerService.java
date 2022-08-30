@@ -1,12 +1,34 @@
 package com.jfisherdev.wfejbmultiserver.customer.ejb;
 
+import com.jfisherdev.wfejbmultiserver.admin.api.config.ConfigProperty;
+import com.jfisherdev.wfejbmultiserver.admin.api.config.ConfigPropertyClient;
+import com.jfisherdev.wfejbmultiserver.admin.api.report.ReportClient;
+import com.jfisherdev.wfejbmultiserver.admin.api.report.ReportFormat;
+import com.jfisherdev.wfejbmultiserver.admin.api.report.ReportRequest;
+import com.jfisherdev.wfejbmultiserver.admin.api.report.ReportResponse;
 import com.jfisherdev.wfejbmultiserver.customer.api.Customer;
 import com.jfisherdev.wfejbmultiserver.customer.api.CustomerServiceRemote;
+
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import java.util.Collections;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Josh Fisher
  */
+@Stateless(name = CustomerServiceRemote.BEAN_NAME)
+@Remote(CustomerServiceRemote.class)
 public class CustomerService implements CustomerServiceRemote {
+
+    private static final Logger logger = Logger.getLogger(CustomerService.class.getName());
+
+    private final ConfigPropertyClient configPropertyClient = new ConfigPropertyClient();
+    private final ReportClient reportClient = new ReportClient();
+    private final Random rng = new Random();
+
     @Override
     public Customer getCustomer(long id) {
         return CustomerStore.getInstance().getCustomer(id).orElseThrow();
@@ -15,5 +37,69 @@ public class CustomerService implements CustomerServiceRemote {
     @Override
     public Customer addNewCustomer(String name) {
         return CustomerStore.getInstance().addNewCustomer(name);
+    }
+
+    @Override
+    public String getCustomerSatisfactionRating(long id, boolean assess, boolean verbose) {
+        final int level = rng.nextInt(9) + 1;
+        final StringBuilder responseBuilder = new StringBuilder();
+        responseBuilder.append("Level = ").append(level);
+        String details = "";
+        if (verbose) {
+            details = getRatingReport(id);
+        }
+        if (assess) {
+            responseBuilder.append(", ").append(assessRating(level));
+        }
+        if (!details.isEmpty()) {
+            responseBuilder.append(", Details=").append(details);
+        }
+        return responseBuilder.toString();
+    }
+
+    @Override
+    public String getCustomerSatisfactionRatingV1(long id) {
+        final int level = rng.nextInt(9) + 1;
+        final StringBuilder responseBuilder = new StringBuilder();
+        responseBuilder.append("Level = ").append(level);
+        final String details = getRatingReport(id);
+        final String assessedLevel = assessRating(level);
+        responseBuilder.append(", ").append(assessedLevel);
+        responseBuilder.append(", Details=").append(details);
+        return responseBuilder.toString();
+    }
+
+    @Override
+    public String getCustomerSatisfactionRatingV2(long id) {
+        final int level = rng.nextInt(9) + 1;
+        final StringBuilder responseBuilder = new StringBuilder();
+        responseBuilder.append("Level = ").append(level);
+        final String assessedLevel = assessRating(level);
+        final String details = getRatingReport(id);
+        responseBuilder.append(", ").append(assessedLevel);
+        responseBuilder.append(", Details=").append(details);
+        return responseBuilder.toString();
+    }
+
+    private String getRatingReport(long id) {
+        final ReportRequest request = new ReportRequest();
+        request.setFormat(ReportFormat.PLAIN);
+        request.setParameters(Collections.singletonMap("id", Long.toString(id)));
+        request.setReportName("CSR");
+        final ReportResponse response = reportClient.submitReport(request);
+        return "CSR REPORT INFO: " + response.getOutputData();
+    }
+
+    private String assessRating(int level) {
+        final ConfigProperty thresholdProperty = configPropertyClient.getConfigProperty("csr.threshold");
+        int threshold = 5;
+        if (thresholdProperty.hasValue()) {
+            try {
+                threshold = Integer.parseInt(thresholdProperty.getValue());
+            } catch (Exception e) {
+                logger.log(Level.SEVERE, "Failed to parse " + thresholdProperty.getKey() + " value: " + thresholdProperty.getValue());
+            }
+        }
+        return String.format("Satisfied=%s", level >= threshold);
     }
 }

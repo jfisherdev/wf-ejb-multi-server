@@ -96,13 +96,17 @@ public class EjbClient implements AutoCloseable {
         Objects.requireNonNull(beanInterface, "Bean interface is required");
         final StringBuilder nameBuilder = new StringBuilder();
         if (EjbStringUtils.isPopulated(app)) {
+            if (isLocalClient()) {
+                nameBuilder.append("java:global/");
+            }
             nameBuilder.append(app).append("/");
         }
+        nameBuilder.append(module).append("/");
 
-        return nameBuilder.append(module).
-                append("/").
-                append(DISTINCT_NAME).
-                append("/").
+        if (!isLocalClient()) {
+            nameBuilder.append(DISTINCT_NAME).append("/");
+        }
+        return nameBuilder.
                 append(fixBeanName(beanName)).
                 append("!").
                 append(beanInterface.getCanonicalName()).toString();
@@ -209,6 +213,10 @@ public class EjbClient implements AutoCloseable {
             return "\"" + beanName + "\"";
         }
         return beanName;
+    }
+
+    private boolean isLocalClient() {
+        return !EjbStringUtils.isPopulated(providerUrl);
     }
 
     @Override

@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+group 'com.jfisherdev'
+version 'unspecified'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(":admin-api")
+    implementation project(":commons")
+    compileOnly group: 'javax', name: 'javaee-api', version: '8.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+}

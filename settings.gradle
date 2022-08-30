@@ -1,0 +1,10 @@
+rootProject.name = 'wf-ejb-multi-server'
+include 'commons'
+include 'admin-api'
+include 'admin-ejb'
+include 'admin-app'
+include 'customer-api'
+include 'customer-ejb'
+include 'customer-web'
+include 'customer-app'
+

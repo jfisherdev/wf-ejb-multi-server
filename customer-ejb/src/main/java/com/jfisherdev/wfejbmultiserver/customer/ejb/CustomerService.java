@@ -59,6 +59,9 @@ public class CustomerService implements CustomerServiceRemote {
 
     @Override
     public String getCustomerSatisfactionRatingV1(long id) {
+        //This can/will fail in a multi-server environment if admin report calls are configured to go to another server
+        //In this case, the first admin app call goes to the remote server as expected, but the second one that should stay
+        //local tries to go to the remote server and fails.
         final int level = rng.nextInt(9) + 1;
         final StringBuilder responseBuilder = new StringBuilder();
         responseBuilder.append("Level = ").append(level);
@@ -71,6 +74,9 @@ public class CustomerService implements CustomerServiceRemote {
 
     @Override
     public String getCustomerSatisfactionRatingV2(long id) {
+        //This does not fail in a multi-server environment if admin report calls are configured to go another server; however,
+        //the report calls do not end up going to the remote server as expected. In this case, the first admin app call
+        //stays local as expected, but the second one that should go to the remote server also stays local.
         final int level = rng.nextInt(9) + 1;
         final StringBuilder responseBuilder = new StringBuilder();
         responseBuilder.append("Level = ").append(level);

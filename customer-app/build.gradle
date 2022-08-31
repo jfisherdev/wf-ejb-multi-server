@@ -28,3 +28,16 @@ ear {
         webModule("customer-web.war", "/customer-web")
     }
 }
+
+task deployStandalone(dependsOn: build) {
+    doLast {
+        String systemProperty = System.getProperty("wildfly.home")
+        String envHome = System.getenv("WILDFLY_HOME") != null ? System.getenv("WILDFLY_HOME") : System.getenv("JBOSS_HOME")
+        String wildflyHome = systemProperty != null ? systemProperty : envHome
+        String deploymentsDir = wildflyHome + "/standalone/deployments"
+        copy {
+            from "$buildDir/libs/customer-app.ear"
+            into deploymentsDir
+        }
+    }
+}

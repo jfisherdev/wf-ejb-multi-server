@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 class ReportManager {
 
     private static final int MIN_TIME = 1;
-    private static final int MAX_TIME = 60;
+    private static final int MAX_TIME = 15;
 
     private static final Logger logger = Logger.getLogger(ReportManager.class.getName());
 

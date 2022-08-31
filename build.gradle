@@ -4,3 +4,7 @@ group 'com.jfisherdev'
 repositories {
     mavenCentral()
 }
+
+
+task deployStandalone() {
+}

@@ -4,7 +4,8 @@ Example project for testing server-to-server EJB invocations on WildFly and iden
 # The Issue
 
 ```
-Given two EAR applications, app1 and app2, both running on two WildFly servers, apphost1 and apphost2:
+Given two EAR applications, app1 and app2, both running on two WildFly servers, apphost1 and apphost2, 
+and non-anonymous authentication being used for EJB invocations:
 
 An EJB call in app1, running on one server, apphost1, that makes a remote EJB call to app2 on another server, apphost2, 
 will error when it later attempts to make a different EJB call to app2 on apphost1, with the error saying unable to
@@ -43,7 +44,9 @@ ConfigService#getConfigProperty call first that stays local, but when it trys to
 that does not go to the remote server and instead stays local, which doesn't error like in the other case but differs from
 what one likely expects.
 
-This has been observed on WildFly 22.0.1.Final as well as WildFly 26.1.0.Final.
+This has been observed on WildFly 22.0.1.Final as well as WildFly 26.1.0.Final. The error that occurs with the v1 endpoint
+does NOT appear to occur when anonymous authentication is used, at least as tested on 22.0.1.Final at the time of writing 
+this.
 
 
 # Motivation

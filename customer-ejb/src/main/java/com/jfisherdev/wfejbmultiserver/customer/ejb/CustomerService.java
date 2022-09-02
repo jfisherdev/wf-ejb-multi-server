@@ -63,6 +63,7 @@ public class CustomerService implements CustomerServiceRemote {
 
     @Override
     public String getCustomerSatisfactionRatingV1(long id) {
+        logger.info("Starting customer satisfaction rating and assessment (V1)");
         //This can/will fail in a multi-server environment if admin report calls are configured to go to another server
         //In this case, the first admin app call goes to the remote server as expected, but the second one that should stay
         //local tries to go to the remote server and fails.
@@ -74,11 +75,13 @@ public class CustomerService implements CustomerServiceRemote {
         final String assessedLevel = assessRating(level);
         responseBuilder.append(", ").append(assessedLevel);
         responseBuilder.append(", Details=").append(details);
+        logger.info("Finished customer satisfaction rating and assessment (V1)");
         return responseBuilder.toString();
     }
 
     @Override
     public String getCustomerSatisfactionRatingV2(long id) {
+        logger.info("Starting customer satisfaction rating and assessment (V2)");
         //This does not fail in a multi-server environment if admin report calls are configured to go another server; however,
         //the report calls do not end up going to the remote server as expected. In this case, the first admin app call
         //stays local as expected, but the second one that should go to the remote server also stays local.
@@ -90,6 +93,7 @@ public class CustomerService implements CustomerServiceRemote {
         final String details = getRatingReport(id);
         responseBuilder.append(", ").append(assessedLevel);
         responseBuilder.append(", Details=").append(details);
+        logger.info("Finished customer satisfaction rating and assessment (V2)");
         return responseBuilder.toString();
     }
 

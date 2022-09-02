@@ -31,7 +31,7 @@ Issuing `GET /customer-web/services/customer/{id}/rating/v1` will do the followi
    InitialContext from the default/local one. For example, the call starting on apphost1 would make this call go to apphost2
 3) Eventually this will call ConfigService#getConfigProperty in the admin-app.
    - The expectation is this call will remain local to the admin-app on the same server the initial getCustomerSatisfactionRatingV1 EJB method.
-   - However, `if report.provider.url` was set, this will error and the message will reference it attempting to go to 
+   - However, if `report.provider.url` was set, this will error and the message will reference it attempting to go to 
    the other server, despite the fact the default/local InitialContext is being used.
 
 What appears to be happening is something with [org.jboss.ejb.client.TransactionInterceptor](https://github.com/wildfly/jboss-ejb-client/blob/4.0/javax/src/main/java/org/jboss/ejb/client/TransactionInterceptor.java)
@@ -39,10 +39,14 @@ and/or [org.jboss.ejb.client.TransactionPostDiscoveryInterceptor](https://github
 is directing the second admin-app call to the last destination associated with an EJB call to that app, even though the 
 local client/context is not aware of it. This was discovered by adding `TRACE` level logging for `org.jboss.ejb[.client...]`.
 
+The trace logging for this with commentary is included in the [demo-v1.txt](demo-v1.txt) file.
+
 As a contrast, `GET /customer-web/services/customer/{id}/rating/v2` will do almost the same thing, but makes the 
 ConfigService#getConfigProperty call first that stays local, but when it trys to make the ReportService#submitReport call
 that does not go to the remote server and instead stays local, which doesn't error like in the other case but differs from
 what one likely expects.
+
+The trace logging for this is included in the [demo-v2.txt](demo-v2.txt) file.
 
 This has been observed on WildFly 22.0.1.Final as well as WildFly 26.1.0.Final. The error that occurs with the v1 endpoint
 does NOT appear to occur when anonymous authentication is used, at least as tested on 22.0.1.Final at the time of writing 

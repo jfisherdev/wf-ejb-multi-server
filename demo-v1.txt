@@ -1,0 +1,322 @@
+### Demonstration of v1 call with report.provider.url property set to route ReportService calls to apphost2
+
+15:50:37,571 DEBUG [org.jboss.ejb.client.invocation] (default task-85) Calling invoke(module = customer-app/customer-ejb/Customer, strong affinity = Local, weak affinity = None):
+15:50:37,572 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: calling interceptor: org.jboss.ejb.client.TransactionInterceptor@56dce3af
+15:50:37,572 DEBUG [org.jboss.ejb.client.invocation] (default task-85) TransactionEJBClientInterceptor: calling handleInvocation, context transaction = null, transaction policy = SUPPORTS
+15:50:37,572 DEBUG [org.jboss.ejb.client.invocation] (default task-85) TransactionEJBClientInterceptor: calling handleInvocation, no context transaction; using caller transaction = null
+15:50:37,572 DEBUG [org.jboss.ejb.client.invocation] (default task-85) TransactionEJBClientInterceptor: Calling  handleInvocation: setting context transaction: transaction = null
+15:50:37,573 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: calling interceptor: org.jboss.ejb.client.AuthenticationContextEJBClientInterceptor@17d04935
+15:50:37,573 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: calling interceptor: org.jboss.ejb.client.NamingEJBClientInterceptor@1b160c9c
+15:50:37,573 DEBUG [org.jboss.ejb.client.invocation] (default task-85) NamingEJBClientInterceptor: calling handleInvocation: skipping missing target
+15:50:37,573 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: calling interceptor: org.jboss.ejb.client.DiscoveryEJBClientInterceptor@4bab14f7
+15:50:37,573 DEBUG [org.jboss.ejb.client.invocation] (default task-85) DiscoveryEJBClientInterceptor: calling handleInvocation - calling executeDiscovery
+15:50:37,573 DEBUG [org.jboss.ejb.client.invocation] (default task-85) DiscoveryEJBClientInterceptor: calling executeDiscovery(locator = StatelessEJBLocator for "customer-app/customer-ejb/Customer", view is interface com.jfisherdev.wfejbmultiserver.customer.api.CustomerServiceRemote, affinity is Local, weak affinity = None)
+15:50:37,573 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: calling interceptor: org.jboss.ejb.client.TransactionPostDiscoveryInterceptor@7adb57b6
+15:50:37,573 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: calling interceptor: org.jboss.ejb.protocol.remote.RemotingEJBClientInterceptor@6fd72039
+15:50:37,573 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: setting receiver, strong affinity = Local, weak affinity = None, remote destination is: local:-
+15:50:37,573 TRACE [org.jboss.ejb.client] (default task-85) Transitioning org.jboss.ejb.client.EJBClientInvocationContext@440ea3b3 from SENDING to SENT (org.jboss.ejb-client@4.0.44.Final//org.jboss.ejb.client.EJBClientInvocationContext.sendRequest(EJBClientInvocationContext.java:495))
+15:50:37,574 INFO  [com.jfisherdev.wfejbmultiserver.customer.ejb.CustomerService] (default task-85) Starting customer satisfaction rating and assessment (V1)
+
+### ReportService#submitReport call goes to apphost2 as expected here
+
+15:50:37,585 DEBUG [org.jboss.ejb.client.invocation] (default task-85) lookupNative: createProxy, locator = StatelessEJBLocator for "admin-app/admin-ejb/ReportService", view is interface com.jfisherdev.wfejbmultiserver.admin.api.report.ReportServiceRemote, affinity is None
+15:50:37,585 DEBUG [org.jboss.ejb.client.invocation] (default task-85) lookupNative: created proxy, locator = StatelessEJBLocator for "admin-app/admin-ejb/ReportService", view is interface com.jfisherdev.wfejbmultiserver.admin.api.report.ReportServiceRemote, affinity is None, weakAffinity = None
+15:50:37,585 DEBUG [org.jboss.ejb.client.invocation] (default task-85) Calling invoke(module = admin-app/admin-ejb/ReportService, strong affinity = None, weak affinity = None): 
+15:50:37,585 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: calling interceptor: org.jboss.ejb.client.TransactionInterceptor@56dce3af
+15:50:37,585 DEBUG [org.jboss.ejb.client.invocation] (default task-85) TransactionEJBClientInterceptor: calling handleInvocation, context transaction = null, transaction policy = SUPPORTS
+15:50:37,585 DEBUG [org.jboss.ejb.client.invocation] (default task-85) TransactionEJBClientInterceptor: calling handleInvocation, no context transaction; using caller transaction = Local transaction (delegate=TransactionImple < ac, BasicAction: 0:ffff0a1b0071:-521ab1f4:63120dd9:1c8fd status: ActionStatus.RUNNING >, owner=Local transaction context for provider JBoss JTA transaction provider)
+15:50:37,586 DEBUG [org.jboss.ejb.client.invocation] (default task-85) TransactionEJBClientInterceptor: calling setupStickinessIfRequired with LocalTransaction, application map = {}, application destination = null
+15:50:37,586 DEBUG [org.jboss.ejb.client.invocation] (default task-85) TransactionEJBClientInterceptor: setting applications attachment using map = {}
+15:50:37,586 DEBUG [org.jboss.ejb.client.invocation] (default task-85) TransactionEJBClientInterceptor: Calling  handleInvocation: setting context transaction: transaction = Local transaction (delegate=TransactionImple < ac, BasicAction: 0:ffff0a1b0071:-521ab1f4:63120dd9:1c8fd status: ActionStatus.RUNNING >, owner=Local transaction context for provider JBoss JTA transaction provider)
+15:50:37,586 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: calling interceptor: org.jboss.ejb.client.AuthenticationContextEJBClientInterceptor@17d04935
+15:50:37,586 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: calling interceptor: org.jboss.ejb.client.NamingEJBClientInterceptor@1b160c9c
+15:50:37,586 DEBUG [org.jboss.ejb.client.invocation] (default task-85) NamingEJBClientInterceptor: calling handleInvocation: setting destination
+15:50:37,587 DEBUG [org.jboss.ejb.client.invocation] (default task-85) NamingEJBClientInterceptor: calling setNamingDestination: providerURIs = [remote+http://apphost2:8080], invocationContext type = org.jboss.ejb.client.EJBClientInvocationContext
+15:50:37,587 DEBUG [org.jboss.ejb.client.invocation] (default task-85) NamingEJBClientInterceptor: setting destination: (size == 1), destination = remote+http://apphost2:8080
+15:50:37,587 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: calling interceptor: org.jboss.ejb.client.DiscoveryEJBClientInterceptor@4bab14f7
+15:50:37,587 DEBUG [org.jboss.ejb.client.invocation] (default task-85) DiscoveryEJBClientInterceptor: calling handleInvocation - destination already discovered (destination = remote+http://apphost2:8080)
+15:50:37,587 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: calling interceptor: org.jboss.ejb.client.TransactionPostDiscoveryInterceptor@7adb57b6
+15:50:37,587 DEBUG [org.jboss.ejb.client.invocation] (default task-85) TransactionPostDiscoveryInterceptor: calling updateOrFollowApplication, destination = remote+http://apphost2:8080, application = Application{application='admin-app', distinctName=''}
+15:50:37,587 DEBUG [org.jboss.ejb.client.invocation] (default task-85) TransactionPostDiscoveryInterceptor: calling updateOrFollowApplication, added destination for application, application = Application{application='admin-app', distinctName=''}
+15:50:37,587 DEBUG [org.jboss.ejb.client.invocation] (default task-85) TransactionPostDiscoveryInterceptor: calling handleInvocation, destination = remote+http://apphost2:8080, application = Application{application='admin-app', distinctName=''}
+15:50:37,587 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: calling interceptor: org.jboss.ejb.protocol.remote.RemotingEJBClientInterceptor@6fd72039
+15:50:37,587 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: setting receiver, strong affinity = None, weak affinity = None, remote destination is: remote+http://apphost2:8080
+15:50:37,587 TRACE [org.jboss.ejb.client] (default task-85) Transitioning org.jboss.ejb.client.EJBClientInvocationContext@7f595781 from SENDING to SENT (org.jboss.ejb-client@4.0.44.Final//org.jboss.ejb.client.EJBClientInvocationContext.sendRequest(EJBClientInvocationContext.java:495))
+15:50:37,588 DEBUG [org.jboss.ejb.client] (default task-85) Using existing AuthenticationContext for writeTransaction(...)
+15:50:37,593 TRACE [org.jboss.ejb.client] (default task-85) Transitioning org.jboss.ejb.client.EJBClientInvocationContext@7f595781 from SENT to WAITING (org.jboss.ejb-client@4.0.44.Final//org.jboss.ejb.client.EJBClientInvocationContext.sendRequestInitial(EJBClientInvocationContext.java:378))
+
+### Wait for ReportService#submitReport to complete, then move on to make ConfigService#getProperty call that should stay local but goes remote and errors
+
+15:50:49,616 TRACE [org.jboss.ejb.client] (XNIO-1 task-1) Transitioning org.jboss.ejb.client.EJBClientInvocationContext@7f595781 from WAITING to READY (org.jboss.ejb-client@4.0.44.Final//org.jboss.ejb.client.EJBClientInvocationContext.resultReady(EJBClientInvocationContext.java:704))
+15:50:49,617 TRACE [org.jboss.ejb.client] (XNIO-1 task-1) Result is ready for org.jboss.ejb.client.EJBClientInvocationContext@7f595781: result producer: org.jboss.ejb.protocol.remote.EJBClientChannel$MethodInvocation$MethodCallResultProducer@5fa22834, current state: READY
+15:50:49,617 TRACE [org.jboss.ejb.client] (default task-85) Transitioning org.jboss.ejb.client.EJBClientInvocationContext@7f595781 from READY to CONSUMING (org.jboss.ejb-client@4.0.44.Final//org.jboss.ejb.client.EJBClientInvocationContext.getResult(EJBClientInvocationContext.java:599))
+15:50:49,618 TRACE [org.jboss.ejb.client] (default task-85) Transitioning org.jboss.ejb.client.EJBClientInvocationContext@7f595781 from CONSUMING to DONE (org.jboss.ejb-client@4.0.44.Final//org.jboss.ejb.client.EJBClientInvocationContext.getResult(EJBClientInvocationContext.java:626))
+15:50:49,618 DEBUG [org.jboss.ejb.client.invocation] (default task-85) getResult(): invocation returned, relocating EJB: strong affinity = None, weak affinity = None
+15:50:49,618 DEBUG [org.jboss.ejb.client.invocation] (default task-85) Calling invoke(module = admin-app/admin-ejb/ConfigService, strong affinity = Local, weak affinity = None): 
+15:50:49,618 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: calling interceptor: org.jboss.ejb.client.TransactionInterceptor@56dce3af
+15:50:49,618 DEBUG [org.jboss.ejb.client.invocation] (default task-85) TransactionEJBClientInterceptor: calling handleInvocation, context transaction = null, transaction policy = SUPPORTS
+15:50:49,618 DEBUG [org.jboss.ejb.client.invocation] (default task-85) TransactionEJBClientInterceptor: calling handleInvocation, no context transaction; using caller transaction = Local transaction (delegate=TransactionImple < ac, BasicAction: 0:ffff0a1b0071:-521ab1f4:63120dd9:1c8fd status: ActionStatus.RUNNING >, owner=Local transaction context for provider JBoss JTA transaction provider)
+15:50:49,618 DEBUG [org.jboss.ejb.client.invocation] (default task-85) TransactionEJBClientInterceptor: calling setupStickinessIfRequired with LocalTransaction, application map = {Application{application='admin-app', distinctName=''}=remote+http://apphost2:8080}, application destination = remote+http://apphost2:8080
+15:50:49,618 DEBUG [org.jboss.ejb.client.invocation] (default task-85) TransactionEJBClientInterceptor: setting destination = remote+http://apphost2:8080
+15:50:49,618 DEBUG [org.jboss.ejb.client.invocation] (default task-85) TransactionEJBClientInterceptor: calling DiscoveryEJBClientInterceptor.setupSessionAffinitiesIfNeeded
+15:50:49,618 DEBUG [org.jboss.ejb.client.invocation] (default task-85) TransactionEJBClientInterceptor: Calling  handleInvocation: setting context transaction: transaction = Local transaction (delegate=TransactionImple < ac, BasicAction: 0:ffff0a1b0071:-521ab1f4:63120dd9:1c8fd status: ActionStatus.RUNNING >, owner=Local transaction context for provider JBoss JTA transaction provider)
+15:50:49,618 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: calling interceptor: org.jboss.ejb.client.AuthenticationContextEJBClientInterceptor@17d04935
+15:50:49,618 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: calling interceptor: org.jboss.ejb.client.NamingEJBClientInterceptor@1b160c9c
+15:50:49,618 DEBUG [org.jboss.ejb.client.invocation] (default task-85) NamingEJBClientInterceptor: calling handleInvocation: skipping missing target
+15:50:49,618 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: calling interceptor: org.jboss.ejb.client.DiscoveryEJBClientInterceptor@4bab14f7
+15:50:49,618 DEBUG [org.jboss.ejb.client.invocation] (default task-85) DiscoveryEJBClientInterceptor: calling handleInvocation - destination already discovered (destination = remote+http://apphost2:8080)
+15:50:49,619 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: calling interceptor: org.jboss.ejb.client.TransactionPostDiscoveryInterceptor@7adb57b6
+15:50:49,619 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: calling interceptor: org.jboss.ejb.protocol.remote.RemotingEJBClientInterceptor@6fd72039
+15:50:49,619 DEBUG [org.jboss.ejb.client.invocation] (default task-85) sendRequest: setting receiver, strong affinity = Local, weak affinity = None, remote destination is: remote+http://apphost2:8080
+15:50:49,619 TRACE [org.jboss.ejb.client] (default task-85) Transitioning org.jboss.ejb.client.EJBClientInvocationContext@6ce9bcd8 from SENDING to SENT (org.jboss.ejb-client@4.0.44.Final//org.jboss.ejb.client.EJBClientInvocationContext.sendRequest(EJBClientInvocationContext.java:495))
+15:50:49,619 TRACE [org.jboss.ejb.client] (default task-85) Transitioning org.jboss.ejb.client.EJBClientInvocationContext@6ce9bcd8 from SENT to WAITING (org.jboss.ejb-client@4.0.44.Final//org.jboss.ejb.client.EJBClientInvocationContext.sendRequestInitial(EJBClientInvocationContext.java:378))
+15:50:49,623 TRACE [org.jboss.ejb.client.invocation] (XNIO-1 task-1) RetryExecutorWrapper: calling getExecutor(executor= org.xnio.nio.NioXnioWorker)
+15:50:49,623 TRACE [org.jboss.ejb.client] (XNIO-1 task-1) Invocation marked failed, state is currently: WAITING
+15:50:49,623 TRACE [org.jboss.ejb.client] (XNIO-1 task-1) Transitioning org.jboss.ejb.client.EJBClientInvocationContext@6ce9bcd8 from WAITING to CONSUMING (org.jboss.ejb-client@4.0.44.Final//org.jboss.ejb.client.EJBClientInvocationContext.failed(EJBClientInvocationContext.java:1065))
+15:50:49,623 DEBUG [org.jboss.ejb.client.invocation] (XNIO-1 task-2) DiscoveryEJBClientInterceptor: handleInvocationResult: (exception = Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. )
+15:50:49,625 DEBUG [org.jboss.ejb.client.invocation] (XNIO-1 task-2) DiscoveryEJBClientInterceptor: blacklisting destination for this invocation (locator = StatelessEJBLocator for "admin-app/admin-ejb/ConfigService", view is interface com.jfisherdev.wfejbmultiserver.admin.api.config.ConfigServiceRemote, affinity is Local, weak affinity = None, missing target = remote+http://apphost2:8080)
+15:50:49,625 DEBUG [org.jboss.ejb.client.invocation] (XNIO-1 task-2) Requesting retry of invocation!
+15:50:49,625 TRACE [org.jboss.ejb.client] (XNIO-1 task-2) Encountered exception while calling getResult(): exception = org.jboss.ejb.client.RequestSendFailedException: Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. 
+15:50:49,625 TRACE [org.jboss.ejb.client] (XNIO-1 task-2) Will retry (requested = true, remaining = 8)
+15:50:49,625 TRACE [org.jboss.ejb.client] (XNIO-1 task-2) Transitioning org.jboss.ejb.client.EJBClientInvocationContext@6ce9bcd8 from CONSUMING to SENDING (org.jboss.ejb-client@4.0.44.Final//org.jboss.ejb.client.EJBClientInvocationContext.getResult(EJBClientInvocationContext.java:655
+
+
+### Error details
+
+2022-09-02 15:50:49,705 ERROR [org.jboss.as.ejb3.invocation] WFLYEJB0034: Jakarta Enterprise Beans Invocation failed on component Customer for method public abstract java.lang.String com.jfisherdev.wfejbmultiserver.customer.api.CustomerServiceRemote.getCustomerSatisfactionRatingV1(long): org.jboss.ejb.client.RequestSendFailedException: Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. 
+	at org.jboss.ejb-client@4.0.44.Final//org.jboss.ejb.protocol.remote.RemoteEJBReceiver$1.handleFailed(RemoteEJBReceiver.java:112)
+	at org.jboss.ejb-client@4.0.44.Final//org.jboss.ejb.protocol.remote.RemoteEJBReceiver$1.handleFailed(RemoteEJBReceiver.java:78)
+	at org.jboss.xnio@3.8.6.Final//org.xnio.IoFuture$HandlingNotifier.notify(IoFuture.java:215)
+	at org.jboss.xnio@3.8.6.Final//org.xnio.AbstractIoFuture$NotifierRunnable.run(AbstractIoFuture.java:720)
+	at org.jboss.xnio@3.8.6.Final//org.xnio.IoUtils$2.execute(IoUtils.java:71)
+	at org.jboss.xnio@3.8.6.Final//org.xnio.AbstractIoFuture.runNotifier(AbstractIoFuture.java:693)
+	at org.jboss.xnio@3.8.6.Final//org.xnio.AbstractIoFuture$NotifierState.doNotify(AbstractIoFuture.java:267)
+	at org.jboss.xnio@3.8.6.Final//org.xnio.AbstractIoFuture$NotifierState.notifyFailed(AbstractIoFuture.java:253)
+	at org.jboss.xnio@3.8.6.Final//org.xnio.AbstractIoFuture.setException(AbstractIoFuture.java:595)
+	at org.jboss.xnio@3.8.6.Final//org.xnio.FutureResult.setException(FutureResult.java:85)
+	at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.EndpointImpl$3.lambda$handleDone$0(EndpointImpl.java:532)
+	at org.jboss.threads@2.4.0.Final//org.jboss.threads.ContextClassLoaderSavingRunnable.run(ContextClassLoaderSavingRunnable.java:35)
+	at org.jboss.threads@2.4.0.Final//org.jboss.threads.EnhancedQueueExecutor.safeRun(EnhancedQueueExecutor.java:1990)
+	at org.jboss.threads@2.4.0.Final//org.jboss.threads.EnhancedQueueExecutor$ThreadBody.doRunTask(EnhancedQueueExecutor.java:1486)
+	at org.jboss.threads@2.4.0.Final//org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1377)
+	at org.jboss.xnio@3.8.6.Final//org.xnio.XnioWorker$WorkerThreadFactory$1$1.run(XnioWorker.java:1280)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+	Suppressed: org.jboss.ejb.client.RequestSendFailedException: Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. 
+		... 17 more
+	Caused by: org.wildfly.security.auth.AuthenticationException: JBREM000308: Authentication failed (no mechanisms left), tried: 
+   JBOSS-LOCAL-USER: org.wildfly.security.auth.AuthenticationException: JBREM000300: Authentication failed due to I/O error
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.doAuthenticate(ConnectionPeerIdentityContext.java:379)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.authenticate(ConnectionPeerIdentityContext.java:183)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.EndpointImpl$3.lambda$handleDone$0(EndpointImpl.java:529)
+		... 6 more
+	Suppressed: org.jboss.ejb.client.RequestSendFailedException: Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. 
+		... 17 more
+	Caused by: org.wildfly.security.auth.AuthenticationException: JBREM000308: Authentication failed (no mechanisms left), tried: 
+   JBOSS-LOCAL-USER: org.wildfly.security.auth.AuthenticationException: JBREM000300: Authentication failed due to I/O error
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.doAuthenticate(ConnectionPeerIdentityContext.java:379)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.authenticate(ConnectionPeerIdentityContext.java:183)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.EndpointImpl$3.lambda$handleDone$0(EndpointImpl.java:529)
+		... 6 more
+	Suppressed: org.jboss.ejb.client.RequestSendFailedException: Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. 
+		... 17 more
+	Caused by: org.wildfly.security.auth.AuthenticationException: JBREM000308: Authentication failed (no mechanisms left), tried: 
+   JBOSS-LOCAL-USER: org.wildfly.security.auth.AuthenticationException: JBREM000300: Authentication failed due to I/O error
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.doAuthenticate(ConnectionPeerIdentityContext.java:379)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.authenticate(ConnectionPeerIdentityContext.java:183)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.EndpointImpl$3.lambda$handleDone$0(EndpointImpl.java:529)
+		... 6 more
+	Suppressed: org.jboss.ejb.client.RequestSendFailedException: Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. 
+		... 17 more
+	Caused by: org.wildfly.security.auth.AuthenticationException: JBREM000308: Authentication failed (no mechanisms left), tried: 
+   JBOSS-LOCAL-USER: org.wildfly.security.auth.AuthenticationException: JBREM000300: Authentication failed due to I/O error
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.doAuthenticate(ConnectionPeerIdentityContext.java:379)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.authenticate(ConnectionPeerIdentityContext.java:183)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.EndpointImpl$3.lambda$handleDone$0(EndpointImpl.java:529)
+		... 6 more
+	Suppressed: org.jboss.ejb.client.RequestSendFailedException: Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. 
+		... 17 more
+	Caused by: org.wildfly.security.auth.AuthenticationException: JBREM000308: Authentication failed (no mechanisms left), tried: 
+   JBOSS-LOCAL-USER: org.wildfly.security.auth.AuthenticationException: JBREM000300: Authentication failed due to I/O error
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.doAuthenticate(ConnectionPeerIdentityContext.java:379)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.authenticate(ConnectionPeerIdentityContext.java:183)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.EndpointImpl$3.lambda$handleDone$0(EndpointImpl.java:529)
+		... 6 more
+	Suppressed: org.jboss.ejb.client.RequestSendFailedException: Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. 
+		... 17 more
+	Caused by: org.wildfly.security.auth.AuthenticationException: JBREM000308: Authentication failed (no mechanisms left), tried: 
+   JBOSS-LOCAL-USER: org.wildfly.security.auth.AuthenticationException: JBREM000300: Authentication failed due to I/O error
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.doAuthenticate(ConnectionPeerIdentityContext.java:379)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.authenticate(ConnectionPeerIdentityContext.java:183)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.EndpointImpl$3.lambda$handleDone$0(EndpointImpl.java:529)
+		... 6 more
+	Suppressed: org.jboss.ejb.client.RequestSendFailedException: Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. 
+		... 17 more
+	Caused by: org.wildfly.security.auth.AuthenticationException: JBREM000308: Authentication failed (no mechanisms left), tried: 
+   JBOSS-LOCAL-USER: org.wildfly.security.auth.AuthenticationException: JBREM000300: Authentication failed due to I/O error
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.doAuthenticate(ConnectionPeerIdentityContext.java:379)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.authenticate(ConnectionPeerIdentityContext.java:183)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.EndpointImpl$3.lambda$handleDone$0(EndpointImpl.java:529)
+		... 6 more
+	Suppressed: org.jboss.ejb.client.RequestSendFailedException: Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. 
+		... 17 more
+	Caused by: org.wildfly.security.auth.AuthenticationException: JBREM000308: Authentication failed (no mechanisms left), tried: 
+   JBOSS-LOCAL-USER: org.wildfly.security.auth.AuthenticationException: JBREM000300: Authentication failed due to I/O error
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.doAuthenticate(ConnectionPeerIdentityContext.java:379)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.authenticate(ConnectionPeerIdentityContext.java:183)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.EndpointImpl$3.lambda$handleDone$0(EndpointImpl.java:529)
+		... 6 more
+Caused by: org.wildfly.security.auth.AuthenticationException: JBREM000308: Authentication failed (no mechanisms left), tried: 
+   JBOSS-LOCAL-USER: org.wildfly.security.auth.AuthenticationException: JBREM000300: Authentication failed due to I/O error
+	at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.doAuthenticate(ConnectionPeerIdentityContext.java:379)
+	at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.authenticate(ConnectionPeerIdentityContext.java:183)
+	at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.EndpointImpl$3.lambda$handleDone$0(EndpointImpl.java:529)
+	... 6 more
+
+2022-09-02 15:50:49,712 ERROR [io.undertow.request] UT005023: Exception handling request to /customer-web/services/customer/1/rating/v1: org.jboss.resteasy.spi.UnhandledException: org.jboss.ejb.client.RequestSendFailedException: Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. 
+	at org.jboss.resteasy.resteasy-core@4.7.4.Final//org.jboss.resteasy.core.ExceptionHandler.handleApplicationException(ExceptionHandler.java:105)
+	at org.jboss.resteasy.resteasy-core@4.7.4.Final//org.jboss.resteasy.core.ExceptionHandler.handleException(ExceptionHandler.java:359)
+	at org.jboss.resteasy.resteasy-core@4.7.4.Final//org.jboss.resteasy.core.SynchronousDispatcher.writeException(SynchronousDispatcher.java:218)
+	at org.jboss.resteasy.resteasy-core@4.7.4.Final//org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:519)
+	at org.jboss.resteasy.resteasy-core@4.7.4.Final//org.jboss.resteasy.core.SynchronousDispatcher.lambda$invoke$4(SynchronousDispatcher.java:261)
+	at org.jboss.resteasy.resteasy-core@4.7.4.Final//org.jboss.resteasy.core.SynchronousDispatcher.lambda$preprocess$0(SynchronousDispatcher.java:161)
+	at org.jboss.resteasy.resteasy-core@4.7.4.Final//org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:364)
+	at org.jboss.resteasy.resteasy-core@4.7.4.Final//org.jboss.resteasy.core.SynchronousDispatcher.preprocess(SynchronousDispatcher.java:164)
+	at org.jboss.resteasy.resteasy-core@4.7.4.Final//org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:247)
+	at org.jboss.resteasy.resteasy-core@4.7.4.Final//org.jboss.resteasy.plugins.server.servlet.ServletContainerDispatcher.service(ServletContainerDispatcher.java:249)
+	at org.jboss.resteasy.resteasy-core@4.7.4.Final//org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:60)
+	at org.jboss.resteasy.resteasy-core@4.7.4.Final//org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.service(HttpServletDispatcher.java:55)
+	at javax.servlet.api@2.0.0.Final//javax.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.handlers.ServletHandler.handleRequest(ServletHandler.java:74)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:129)
+	at io.opentracing.contrib.opentracing-jaxrs2//io.opentracing.contrib.jaxrs2.server.SpanFinishingFilter.doFilter(SpanFinishingFilter.java:52)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:61)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.handlers.FilterHandler.handleRequest(FilterHandler.java:84)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.handlers.security.ServletSecurityRoleHandler.handleRequest(ServletSecurityRoleHandler.java:62)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.handlers.ServletChain$1.handleRequest(ServletChain.java:68)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.handlers.ServletDispatchingHandler.handleRequest(ServletDispatchingHandler.java:36)
+	at org.wildfly.security.elytron-web.undertow-server@1.10.1.Final//org.wildfly.elytron.web.undertow.server.ElytronRunAsHandler.lambda$handleRequest$1(ElytronRunAsHandler.java:68)
+	at org.wildfly.security.elytron-base@1.19.0.Final//org.wildfly.security.auth.server.FlexibleIdentityAssociation.runAsFunctionEx(FlexibleIdentityAssociation.java:103)
+	at org.wildfly.security.elytron-base@1.19.0.Final//org.wildfly.security.auth.server.Scoped.runAsFunctionEx(Scoped.java:161)
+	at org.wildfly.security.elytron-base@1.19.0.Final//org.wildfly.security.auth.server.Scoped.runAs(Scoped.java:73)
+	at org.wildfly.security.elytron-web.undertow-server@1.10.1.Final//org.wildfly.elytron.web.undertow.server.ElytronRunAsHandler.handleRequest(ElytronRunAsHandler.java:67)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.handlers.RedirectDirHandler.handleRequest(RedirectDirHandler.java:68)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.handlers.security.SSLInformationAssociationHandler.handleRequest(SSLInformationAssociationHandler.java:117)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.handlers.security.ServletAuthenticationCallHandler.handleRequest(ServletAuthenticationCallHandler.java:57)
+	at io.undertow.core@2.2.16.Final//io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.core@2.2.16.Final//io.undertow.security.handlers.AbstractConfidentialityHandler.handleRequest(AbstractConfidentialityHandler.java:46)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.handlers.security.ServletConfidentialityConstraintHandler.handleRequest(ServletConfidentialityConstraintHandler.java:64)
+	at io.undertow.core@2.2.16.Final//io.undertow.security.handlers.AbstractSecurityContextAssociationHandler.handleRequest(AbstractSecurityContextAssociationHandler.java:43)
+	at org.wildfly.security.elytron-web.undertow-server-servlet@1.10.1.Final//org.wildfly.elytron.web.undertow.server.servlet.CleanUpHandler.handleRequest(CleanUpHandler.java:38)
+	at io.undertow.core@2.2.16.Final//io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at org.wildfly.extension.undertow@26.1.0.Final//org.wildfly.extension.undertow.security.jacc.JACCContextIdHandler.handleRequest(JACCContextIdHandler.java:61)
+	at io.undertow.core@2.2.16.Final//io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at org.wildfly.extension.undertow@26.1.0.Final//org.wildfly.extension.undertow.deployment.GlobalRequestControllerHandler.handleRequest(GlobalRequestControllerHandler.java:68)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.handlers.SendErrorPageHandler.handleRequest(SendErrorPageHandler.java:52)
+	at io.undertow.core@2.2.16.Final//io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.core@2.2.16.Final//io.undertow.server.handlers.MetricsHandler.handleRequest(MetricsHandler.java:64)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.core.MetricsChainHandler.handleRequest(MetricsChainHandler.java:59)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.handlers.ServletInitialHandler.handleFirstRequest(ServletInitialHandler.java:275)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.handlers.ServletInitialHandler.access$100(ServletInitialHandler.java:79)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.handlers.ServletInitialHandler$2.call(ServletInitialHandler.java:134)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.handlers.ServletInitialHandler$2.call(ServletInitialHandler.java:131)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.core.ServletRequestContextThreadSetupAction$1.call(ServletRequestContextThreadSetupAction.java:48)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.core.ContextClassLoaderSetupAction$1.call(ContextClassLoaderSetupAction.java:43)
+	at org.wildfly.extension.undertow@26.1.0.Final//org.wildfly.extension.undertow.deployment.UndertowDeploymentInfoService$UndertowThreadSetupAction.lambda$create$0(UndertowDeploymentInfoService.java:1544)
+	at org.wildfly.extension.undertow@26.1.0.Final//org.wildfly.extension.undertow.deployment.UndertowDeploymentInfoService$UndertowThreadSetupAction.lambda$create$0(UndertowDeploymentInfoService.java:1544)
+	at org.wildfly.extension.undertow@26.1.0.Final//org.wildfly.extension.undertow.deployment.UndertowDeploymentInfoService$UndertowThreadSetupAction.lambda$create$0(UndertowDeploymentInfoService.java:1544)
+	at org.wildfly.extension.undertow@26.1.0.Final//org.wildfly.extension.undertow.deployment.UndertowDeploymentInfoService$UndertowThreadSetupAction.lambda$create$0(UndertowDeploymentInfoService.java:1544)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.handlers.ServletInitialHandler.dispatchRequest(ServletInitialHandler.java:255)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.handlers.ServletInitialHandler.access$000(ServletInitialHandler.java:79)
+	at io.undertow.servlet@2.2.16.Final//io.undertow.servlet.handlers.ServletInitialHandler$1.handleRequest(ServletInitialHandler.java:100)
+	at io.undertow.core@2.2.16.Final//io.undertow.server.Connectors.executeRootHandler(Connectors.java:387)
+	at io.undertow.core@2.2.16.Final//io.undertow.server.HttpServerExchange$1.run(HttpServerExchange.java:852)
+	at org.jboss.threads@2.4.0.Final//org.jboss.threads.ContextClassLoaderSavingRunnable.run(ContextClassLoaderSavingRunnable.java:35)
+	at org.jboss.threads@2.4.0.Final//org.jboss.threads.EnhancedQueueExecutor.safeRun(EnhancedQueueExecutor.java:1990)
+	at org.jboss.threads@2.4.0.Final//org.jboss.threads.EnhancedQueueExecutor$ThreadBody.doRunTask(EnhancedQueueExecutor.java:1486)
+	at org.jboss.threads@2.4.0.Final//org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1377)
+	at org.jboss.xnio@3.8.6.Final//org.xnio.XnioWorker$WorkerThreadFactory$1$1.run(XnioWorker.java:1280)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: org.jboss.ejb.client.RequestSendFailedException: Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. 
+	at org.jboss.ejb-client@4.0.44.Final//org.jboss.ejb.protocol.remote.RemoteEJBReceiver$1.handleFailed(RemoteEJBReceiver.java:112)
+	at org.jboss.ejb-client@4.0.44.Final//org.jboss.ejb.protocol.remote.RemoteEJBReceiver$1.handleFailed(RemoteEJBReceiver.java:78)
+	at org.jboss.xnio@3.8.6.Final//org.xnio.IoFuture$HandlingNotifier.notify(IoFuture.java:215)
+	at org.jboss.xnio@3.8.6.Final//org.xnio.AbstractIoFuture$NotifierRunnable.run(AbstractIoFuture.java:720)
+	at org.jboss.xnio@3.8.6.Final//org.xnio.IoUtils$2.execute(IoUtils.java:71)
+	at org.jboss.xnio@3.8.6.Final//org.xnio.AbstractIoFuture.runNotifier(AbstractIoFuture.java:693)
+	at org.jboss.xnio@3.8.6.Final//org.xnio.AbstractIoFuture$NotifierState.doNotify(AbstractIoFuture.java:267)
+	at org.jboss.xnio@3.8.6.Final//org.xnio.AbstractIoFuture$NotifierState.notifyFailed(AbstractIoFuture.java:253)
+	at org.jboss.xnio@3.8.6.Final//org.xnio.AbstractIoFuture.setException(AbstractIoFuture.java:595)
+	at org.jboss.xnio@3.8.6.Final//org.xnio.FutureResult.setException(FutureResult.java:85)
+	at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.EndpointImpl$3.lambda$handleDone$0(EndpointImpl.java:532)
+	... 6 more
+	Suppressed: org.jboss.ejb.client.RequestSendFailedException: Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. 
+		... 17 more
+	Caused by: org.wildfly.security.auth.AuthenticationException: JBREM000308: Authentication failed (no mechanisms left), tried: 
+   JBOSS-LOCAL-USER: org.wildfly.security.auth.AuthenticationException: JBREM000300: Authentication failed due to I/O error
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.doAuthenticate(ConnectionPeerIdentityContext.java:379)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.authenticate(ConnectionPeerIdentityContext.java:183)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.EndpointImpl$3.lambda$handleDone$0(EndpointImpl.java:529)
+		... 6 more
+	Suppressed: org.jboss.ejb.client.RequestSendFailedException: Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. 
+		... 17 more
+	Caused by: org.wildfly.security.auth.AuthenticationException: JBREM000308: Authentication failed (no mechanisms left), tried: 
+   JBOSS-LOCAL-USER: org.wildfly.security.auth.AuthenticationException: JBREM000300: Authentication failed due to I/O error
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.doAuthenticate(ConnectionPeerIdentityContext.java:379)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.authenticate(ConnectionPeerIdentityContext.java:183)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.EndpointImpl$3.lambda$handleDone$0(EndpointImpl.java:529)
+		... 6 more
+	Suppressed: org.jboss.ejb.client.RequestSendFailedException: Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. 
+		... 17 more
+	Caused by: org.wildfly.security.auth.AuthenticationException: JBREM000308: Authentication failed (no mechanisms left), tried: 
+   JBOSS-LOCAL-USER: org.wildfly.security.auth.AuthenticationException: JBREM000300: Authentication failed due to I/O error
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.doAuthenticate(ConnectionPeerIdentityContext.java:379)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.authenticate(ConnectionPeerIdentityContext.java:183)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.EndpointImpl$3.lambda$handleDone$0(EndpointImpl.java:529)
+		... 6 more
+	Suppressed: org.jboss.ejb.client.RequestSendFailedException: Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. 
+		... 17 more
+	Caused by: org.wildfly.security.auth.AuthenticationException: JBREM000308: Authentication failed (no mechanisms left), tried: 
+   JBOSS-LOCAL-USER: org.wildfly.security.auth.AuthenticationException: JBREM000300: Authentication failed due to I/O error
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.doAuthenticate(ConnectionPeerIdentityContext.java:379)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.authenticate(ConnectionPeerIdentityContext.java:183)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.EndpointImpl$3.lambda$handleDone$0(EndpointImpl.java:529)
+		... 6 more
+	Suppressed: org.jboss.ejb.client.RequestSendFailedException: Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. 
+		... 17 more
+	Caused by: org.wildfly.security.auth.AuthenticationException: JBREM000308: Authentication failed (no mechanisms left), tried: 
+   JBOSS-LOCAL-USER: org.wildfly.security.auth.AuthenticationException: JBREM000300: Authentication failed due to I/O error
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.doAuthenticate(ConnectionPeerIdentityContext.java:379)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.authenticate(ConnectionPeerIdentityContext.java:183)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.EndpointImpl$3.lambda$handleDone$0(EndpointImpl.java:529)
+		... 6 more
+	Suppressed: org.jboss.ejb.client.RequestSendFailedException: Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. 
+		... 17 more
+	Caused by: org.wildfly.security.auth.AuthenticationException: JBREM000308: Authentication failed (no mechanisms left), tried: 
+   JBOSS-LOCAL-USER: org.wildfly.security.auth.AuthenticationException: JBREM000300: Authentication failed due to I/O error
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.doAuthenticate(ConnectionPeerIdentityContext.java:379)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.authenticate(ConnectionPeerIdentityContext.java:183)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.EndpointImpl$3.lambda$handleDone$0(EndpointImpl.java:529)
+		... 6 more
+	Suppressed: org.jboss.ejb.client.RequestSendFailedException: Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. 
+		... 17 more
+	Caused by: org.wildfly.security.auth.AuthenticationException: JBREM000308: Authentication failed (no mechanisms left), tried: 
+   JBOSS-LOCAL-USER: org.wildfly.security.auth.AuthenticationException: JBREM000300: Authentication failed due to I/O error
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.doAuthenticate(ConnectionPeerIdentityContext.java:379)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.authenticate(ConnectionPeerIdentityContext.java:183)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.EndpointImpl$3.lambda$handleDone$0(EndpointImpl.java:529)
+		... 6 more
+	Suppressed: org.jboss.ejb.client.RequestSendFailedException: Error in connecting to Destination @remote+http://apphost2:8080 : Please check if the client and server are configured to use the same protocol and ports. 
+		... 17 more
+	Caused by: org.wildfly.security.auth.AuthenticationException: JBREM000308: Authentication failed (no mechanisms left), tried: 
+   JBOSS-LOCAL-USER: org.wildfly.security.auth.AuthenticationException: JBREM000300: Authentication failed due to I/O error
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.doAuthenticate(ConnectionPeerIdentityContext.java:379)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.authenticate(ConnectionPeerIdentityContext.java:183)
+		at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.EndpointImpl$3.lambda$handleDone$0(EndpointImpl.java:529)
+		... 6 more
+Caused by: org.wildfly.security.auth.AuthenticationException: JBREM000308: Authentication failed (no mechanisms left), tried: 
+   JBOSS-LOCAL-USER: org.wildfly.security.auth.AuthenticationException: JBREM000300: Authentication failed due to I/O error
+	at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.doAuthenticate(ConnectionPeerIdentityContext.java:379)
+	at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.ConnectionPeerIdentityContext.authenticate(ConnectionPeerIdentityContext.java:183)
+	at org.jboss.remoting@5.0.24.Final//org.jboss.remoting3.EndpointImpl$3.lambda$handleDone$0(EndpointImpl.java:529)
+	... 6 more

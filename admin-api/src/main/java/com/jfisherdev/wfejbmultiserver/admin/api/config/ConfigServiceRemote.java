@@ -9,4 +9,6 @@ public interface ConfigServiceRemote {
 
     ConfigProperty getConfigProperty(String key);
 
+    ConfigProperty getConfigProperty(String key, String defaultValue);
+
 }

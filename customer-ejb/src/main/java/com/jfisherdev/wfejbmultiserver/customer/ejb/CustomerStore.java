@@ -1,13 +1,17 @@
 package com.jfisherdev.wfejbmultiserver.customer.ejb;
 
 import com.jfisherdev.wfejbmultiserver.customer.api.Customer;
+import com.jfisherdev.wfejbmultiserver.customer.api.CustomerSatisfactionRating;
 
+import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * @author Josh Fisher
@@ -38,6 +42,7 @@ class CustomerStore {
     }
 
     private final Map<Long, Customer> customers = new ConcurrentHashMap<>();
+    private final Set<CustomerSatisfactionRating> satisfactionRatings = new LinkedHashSet<>();
     private final AtomicLong customerSequence = new AtomicLong(3);
 
     CustomerStore() {
@@ -55,5 +60,16 @@ class CustomerStore {
         newCustomer.setId(customerSequence.incrementAndGet());
         newCustomer.setName(name);
         return newCustomer;
+    }
+
+    CustomerSatisfactionRating addRating(CustomerSatisfactionRating rating) {
+        satisfactionRatings.add(rating);
+        return rating;
+    }
+
+    Set<CustomerSatisfactionRating> getSatisfactionRatingsForCustomer(long id) {
+        return satisfactionRatings.stream().filter(rating -> id == rating.getCustomerId()).
+                sorted(Comparator.comparing(CustomerSatisfactionRating::getRatingTime)).
+                collect(Collectors.toCollection(LinkedHashSet::new));
     }
 }

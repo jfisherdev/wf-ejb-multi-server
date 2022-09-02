@@ -8,10 +8,8 @@ import com.jfisherdev.wfejbmultiserver.admin.api.report.ReportStatus;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -61,7 +59,9 @@ public class ReportService implements ReportServiceRemote {
 
     @Override
     public ReportStatus getReportStatus(String jobId) {
-        return reportManager.getReportRun(jobId).orElseThrow().getStatus();
+        return reportManager.getReportRun(jobId).
+                orElseThrow(()->new RuntimeException("No report found for job ID: " + jobId)).
+                getStatus();
     }
 
     @Override

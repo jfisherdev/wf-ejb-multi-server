@@ -4,6 +4,7 @@ import com.jfisherdev.wfejbmultiserver.commons.ejbclient.EjbClient;
 import com.jfisherdev.wfejbmultiserver.commons.ejbclient.EjbClientFactoryLocator;
 
 import javax.naming.NamingException;
+import java.util.Set;
 
 /**
  * @author Josh Fisher
@@ -33,6 +34,10 @@ public class CustomerClient {
 
     public String getCustomerSatisfactionRatingV2(long id) {
         return getService().getCustomerSatisfactionRatingV2(id);
+    }
+
+    public Set<CustomerSatisfactionRating> getCustomerSatisfactionRatingHistory(long id) {
+        return getService().getCustomerSatisfactionRatingHistory(id);
     }
 
     private CustomerServiceRemote getService() {

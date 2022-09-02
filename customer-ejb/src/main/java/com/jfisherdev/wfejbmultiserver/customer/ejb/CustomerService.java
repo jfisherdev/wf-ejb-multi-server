@@ -7,12 +7,15 @@ import com.jfisherdev.wfejbmultiserver.admin.api.report.ReportFormat;
 import com.jfisherdev.wfejbmultiserver.admin.api.report.ReportRequest;
 import com.jfisherdev.wfejbmultiserver.admin.api.report.ReportResponse;
 import com.jfisherdev.wfejbmultiserver.customer.api.Customer;
+import com.jfisherdev.wfejbmultiserver.customer.api.CustomerSatisfactionRating;
 import com.jfisherdev.wfejbmultiserver.customer.api.CustomerServiceRemote;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import java.time.Instant;
 import java.util.Collections;
 import java.util.Random;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,6 +45,7 @@ public class CustomerService implements CustomerServiceRemote {
     @Override
     public String getCustomerSatisfactionRating(long id, boolean assess, boolean verbose) {
         final int level = rng.nextInt(9) + 1;
+        addRating(id, level);
         final StringBuilder responseBuilder = new StringBuilder();
         responseBuilder.append("Level = ").append(level);
         String details = "";
@@ -63,6 +67,7 @@ public class CustomerService implements CustomerServiceRemote {
         //In this case, the first admin app call goes to the remote server as expected, but the second one that should stay
         //local tries to go to the remote server and fails.
         final int level = rng.nextInt(9) + 1;
+        addRating(id, level);
         final StringBuilder responseBuilder = new StringBuilder();
         responseBuilder.append("Level = ").append(level);
         final String details = getRatingReport(id);
@@ -78,6 +83,7 @@ public class CustomerService implements CustomerServiceRemote {
         //the report calls do not end up going to the remote server as expected. In this case, the first admin app call
         //stays local as expected, but the second one that should go to the remote server also stays local.
         final int level = rng.nextInt(9) + 1;
+        addRating(id, level);
         final StringBuilder responseBuilder = new StringBuilder();
         responseBuilder.append("Level = ").append(level);
         final String assessedLevel = assessRating(level);
@@ -85,6 +91,19 @@ public class CustomerService implements CustomerServiceRemote {
         responseBuilder.append(", ").append(assessedLevel);
         responseBuilder.append(", Details=").append(details);
         return responseBuilder.toString();
+    }
+
+    @Override
+    public Set<CustomerSatisfactionRating> getCustomerSatisfactionRatingHistory(long id) {
+        return CustomerStore.getInstance().getSatisfactionRatingsForCustomer(id);
+    }
+
+    private void addRating(long id, int rating) {
+        final CustomerSatisfactionRating ratingEntry = new CustomerSatisfactionRating();
+        ratingEntry.setCustomerId(id);
+        ratingEntry.setRating(rating);
+        ratingEntry.setRatingTime(Instant.now());
+        CustomerStore.getInstance().addRating(ratingEntry);
     }
 
     private String getRatingReport(long id) {

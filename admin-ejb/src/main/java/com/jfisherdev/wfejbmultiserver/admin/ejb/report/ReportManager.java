@@ -120,6 +120,7 @@ class ReportManager {
         reportRun.setJobId(jobId);
         reportRun.setStatus(ReportStatus.QUEUED);
         reportRunQueue.offer(reportRun);
+        logger.info("Submitted report (Job ID: " + jobId + "): " + request);
         return jobId;
     }
 

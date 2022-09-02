@@ -2,6 +2,7 @@ package com.jfisherdev.wfejbmultiserver.customer.web;
 
 import com.jfisherdev.wfejbmultiserver.customer.api.Customer;
 import com.jfisherdev.wfejbmultiserver.customer.api.CustomerClient;
+import com.jfisherdev.wfejbmultiserver.customer.api.CustomerSatisfactionRating;
 
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.FormParam;
@@ -12,6 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import java.util.Set;
 
 /**
  * @author Josh Fisher
@@ -54,6 +56,13 @@ public class CustomerRestService {
     @Produces(MediaType.TEXT_PLAIN)
     public String getCustomerSatisfactionRatingV2(@PathParam("id") long id) {
         return customerClient.getCustomerSatisfactionRatingV2(id);
+    }
+
+    @GET
+    @Path("/{id}/rating/history")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Set<CustomerSatisfactionRating> getCustomerSatisfactionRatingHistory(@PathParam("id") long id) {
+        return customerClient.getCustomerSatisfactionRatingHistory(id);
     }
 
 }

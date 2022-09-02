@@ -1,5 +1,7 @@
 package com.jfisherdev.wfejbmultiserver.customer.api;
 
+import java.util.Set;
+
 /**
  * @author Josh Fisher
  */
@@ -18,5 +20,7 @@ public interface CustomerServiceRemote {
 
     //This one does not fail, but will keep admin report calls local even configured to go to another server
     String getCustomerSatisfactionRatingV2(long id);
+
+    Set<CustomerSatisfactionRating> getCustomerSatisfactionRatingHistory(long id);
 
 }

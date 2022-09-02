@@ -46,7 +46,8 @@ what one likely expects.
 
 This has been observed on WildFly 22.0.1.Final as well as WildFly 26.1.0.Final. The error that occurs with the v1 endpoint
 does NOT appear to occur when anonymous authentication is used, at least as tested on 22.0.1.Final at the time of writing 
-this.
+this; however, the behavior of a call expected to go remote staying local as discussed with the v2 endpoint does still 
+appear to happen.
 
 
 # Motivation

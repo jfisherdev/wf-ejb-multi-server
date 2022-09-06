@@ -52,6 +52,11 @@ This has been observed on WildFly 22.0.1.Final as well as WildFly 26.1.0.Final. 
 does NOT appear to occur when anonymous authentication is used, at least as tested on 22.0.1.Final at the time of writing 
 this; however, the ConfigService#getConfigProperty call that should stay local still goes remote contrary to expectation.
 
+It is also worth noting that while the error mentions attempting to use the JBOSS-LOCAL-USER authentication mechanism,
+which was configured as a supported authentication mechanism in the test case, an error would still happen if say that 
+were removed and other mechanisms such as DIGEST-MD5 were present, with the difference being the message details. Either way,
+this appears to go back to attempting to use a local context with a remote server.
+
 
 # Motivation
 
